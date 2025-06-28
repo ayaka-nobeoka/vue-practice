@@ -1,47 +1,39 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <h1>{{ message }}</h1>
+    <input v-model="message" />
+    <HelloWorld msg="やっほー！" />
+    <button @click="sayHello">クリック</button>
+    <ul>
+      <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+    </ul>
+    <p v-if="message.length > 5">文字が多いよ！</p>
+  </div>
 </template>
 
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+
+export default {
+  components: {
+    HelloWorld, // ✅ ここで登録！
+  },
+  data() {
+    return {
+      message: "こんにちは Vue!",
+      items: ["りんご", "みかん", "ぶどう"],
+    };
+  },
+  methods: {
+    sayHello() {
+      alert(`こんにちは！メッセージは: ${this.message}`);
+    },
+  },
+};
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h1 {
+  color: #42b983;
 }
 </style>
